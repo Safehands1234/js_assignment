@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difference between var, let and const keywords in JavaScript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Mr. Oginni</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Days
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="index.html">Day 1</a></li>
+                            <li><a class="dropdown-item" href="Day2.html">Day 2</a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h3>
+            Difference between var, let and const keywords in JavaScript
+        </h3>
+
+        <p>
+            The keywords var, let, and const in JavaScript define the variable scope and behavior. The var keyword has
+            function scope and is hoisted. The let and const keywords have block scope, with const requiring an initial
+            value and preventing reassignment. <br><br>
+
+            A lot of shiny new features came out with ES2015 (ES6). And now, since it's 2020, it's assumed that a lot of
+            JavaScript developers have become familiar with and have started using these features. <br>
+
+            While this assumption might be partially true, it's still possible that some of these features remain a
+            mystery to some devs. <br><br>
+
+            One of the features that came with ES6 is the addition of let and const, which can be used for variable
+            declaration. The question is, what makes them different from good ol' var which we've been using? If you are
+            still not clear about this, then this article is for you. <br> <br>
+
+            In this article, we'll discuss var, let and const with respect to their scope, use, and hoisting. As you
+            read, take note of the differences between them that I'll point out. <br><br>
+
+        </p>
+
+        <h4>
+            Var
+        </h4>
+        <p>
+            Before the advent of ES6, var declarations ruled. There are issues
+            associated with variables declared with var, though. That is why it was necessary for new ways to declare
+            variables to emerge. First,
+            let's get to understand var more before we discuss those issues.
+        </p>
+
+        <h4>
+            Scope of var
+        </h4>
+        <p>
+            Scope essentially means where these variables are available for use. var declarations are globally scoped or
+            function/locally scoped. <br><br>
+            The scope is global when a var variable is declared outside a function. This means that any variable that is
+            declared with var outside a function block is available for use in the whole window.
+            var is function scoped when it is declared within a function. This means that it is available and can be
+            accessed only within that function. <br><br>
+            To understand further, look at the example below. <br><br>
+            var greeter = "hey hi"; <br>
+
+            function newFunction() { <br>
+            var hello = "hello";
+            } <br><br>
+            Here, greeter is globally scoped because it exists outside a function while hello is function scoped. So we
+            cannot access the variable hello outside of a function. So if we do this:
+            var tester = "hey hi"; <br>
+
+            function newFunction() {
+            var hello = "hello";
+            } <br>
+            console.log(hello); // error: hello is not defined
+            We'll get an error which is as a result of hello not being available outside the function.
+
+        </p>
+
+        <h4>
+            var variables can be re-declared and updated
+        </h4>
+
+        <p>
+            This means that we can do this within the same scope and won't get an error.
+            var greeter = "hey hi"; <br>
+            var greeter = "say Hello instead"; <br>
+            and this also <br>
+            var greeter = "hey hi"; <br>
+            greeter = "say Hello instead"; <br>
+
+        </p>
+
+        <h4>
+            Hoisting of var
+        </h4>
+
+        <p>
+            Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their
+            scope before code execution. This means that if we do this: <br><br>
+            console.log (greeter); <br>
+            var greeter = "say hello" <br>
+            it is interpreted as this: <br>
+            var greeter; <br>
+            console.log(greeter); // greeter is undefined <br>
+            greeter = "say hello" <br>
+            So var variables are hoisted to the top of their scope and initialized with a value of undefined. <br><br>
+
+        </p>
+
+        <h4>
+            Problem with var
+        </h4>
+
+        <p>
+            There's a weakness that comes with var. I'll use the example below to explain: <br>
+            var greeter = "hey hi"; <br>
+            var times = 4; <br>
+
+            if (times > 3) { <br>
+            var greeter = "say Hello instead";
+            } <br>
+
+            console.log(greeter) // "say Hello instead" <br>
+            So, since times > 3 returns true, greeter is redefined to "say Hello instead". While this is not a problem
+            if you knowingly want greeter to be redefined, it becomes a problem when you do not realize that a variable
+            greeter has already been defined before. <br>
+            If you have used greeter in other parts of your code, you might be surprised at the output you might get.
+            This will likely cause a lot of bugs in your code. This is why let and const are necessary. <br><br>
+        </p>
+
+        <h4>
+            Let
+        </h4>
+
+        <p>
+            let is now preferred for variable declaration. It's no surprise as it comes as an improvement to var
+            declarations. It also solves the problem with var that we just covered. Let's consider why this is so.
+        </p>
+
+        <h4>
+            let is block scoped
+        </h4>
+        <p>
+            A block is a chunk of code bounded by {}. A block lives in curly braces. Anything within curly braces is a
+            block. <br><br>
+            So a variable declared in a block with let is only available for use within that block. Let me explain this
+            with an example: <br>
+            let greeting = "say Hi"; <br>
+            let times = 4; <br>
+
+            if (times > 3) { <br>
+            let hello = "say Hello instead"; <br>
+            console.log(hello);// "say Hello instead"
+            } <br>
+            console.log(hello) // hello is not defined <br>
+            We see that using hello outside its block (the curly braces where it was defined) returns an error. This is
+            because let variables are block scoped. <br><br>
+        </p>
+        <h4>
+            let can be updated but not re-declared.
+        </h4>
+
+        <p>
+            Just like var, a variable declared with let can be updated
+            within its scope. Unlike var, a let variable
+            cannot be re-declared within its scope. So while this will work: <br><br>
+            let greeting = "say Hi"; <br>
+            greeting = "say Hello instead"; <br>
+            this will return an error: <br>
+            let greeting = "say Hi"; <br>
+            let greeting = "say Hello instead"; // error: Identifier 'greeting' has already been declared
+            However, if the same variable is defined in different scopes, there will be no error: <br><br>
+            let greeting = "say Hi"; <br>
+            if (true) { <br>
+            let greeting = "say Hello instead"; <br>
+            console.log(greeting); // "say Hello instead"
+            } <br>
+            console.log(greeting); // "say Hi" <br>
+            Why is there no error? This is because both instances are treated as different variables since they have
+            different scopes. <br><br>
+            This fact makes let a better choice than var. When using let, you don't have to bother if you have used a
+            name for a variable before as a variable exists only within its scope.
+            Also, since a variable cannot be declared more than once within a scope, then the problem discussed earlier
+            that occurs with var does not happen. <br><br>
+
+        </p>
+        <h4>
+            Hoisting of let
+        </h4>
+        <p>
+            Just like var, let declarations are hoisted to the top.
+            Unlike var which is initialized as undefined, the let keyword
+            is not initialized. So if you try to use a
+            let variable before declaration, you'll get a Reference Error.
+        </p>
+
+        <h4>
+            Const
+        </h4>
+        <p>
+            Variables declared with the const maintain constant values. const declarations share some similarities with
+            let declarations.
+        </p>
+        <h4>
+            const declarations are block scoped
+        </h4>
+
+        <p>
+            Like let declarations, const declarations can only be accessed within the block they were declared.
+        </p>
+
+        <h4>
+            const cannot be updated or re-declared
+        </h4>
+
+        <p>
+            This means that the value of a variable declared with const remains the same within its scope. It cannot be
+            updated or re-declared. So if we declare a variable with const, we can neither do this: <br><br>
+            const greeting = "say Hi"; <br>
+            greeting = "say Hello instead";// error: Assignment to constant variable.
+            nor this: <br>
+            const greeting = "say Hi"; <br>
+            const greeting = "say Hello instead";// error: Identifier 'greeting' has already been declared <br>
+            Every const declaration, therefore, must be initialized at the time of declaration. <br>
+            This behavior is somehow different when it comes to objects declared with const.
+            While a const object cannot be updated, the properties of this objects can be updated. Therefore, if we
+            declare a const object as this: <br><br>
+            const greeting = { <br>
+            message: "say Hi",<br>
+            times: 4 <br>
+            } <br>
+            while we cannot do this: <br>
+            greeting = { <br>
+            words: "Hello", <br>
+            number: "five" <br>
+            } // error: Assignment to constant variable. <br>
+            we can do this: <br>
+            greeting.message = "say Hello instead"; <br>
+            This will update the value of greeting.message without returning errors.
+        </p>
+
+        <h4>
+            Hoisting of const
+        </h4>
+
+        <p>
+            Just like let, const declarations are hoisted to the top but are not initialized.
+            So just in case you missed the differences, here they are:
+
+        </p>
+        <ul>
+            <li>var declarations are globally scoped or function scoped while let and const are block scoped.</li>
+            <li>var variables can be updated and re-declared within its scope; let variables can be updated but not re-declared; const variables can neither be updated nor re-declared.</li>
+            <li>They are all hoisted to the top of their scope. But while var variables are initialized with undefined, let and const variables are not initialized.</li>
+            <li>While var and let can be declared without being initialized, const must be initialized during declaration.</li>
+        </ul>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
