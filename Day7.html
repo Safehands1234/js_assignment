@@ -37,8 +37,108 @@
           </div>
         </div>
       </nav>
+
+      <div class="container">
+        <h1>Guess My Number</h1>
+        <p>Guess a number between 45 and 60</p>
+        <input type="text" id="myinput" placeholder="Guess a number"/>
+        <button id="checkit" style="border-radius: 10px;">Check</button>
+        <button id="playagain" style="display: none; border-radius: 10px;">Play Again</button>
+        <h2 id="guessnow">Start guessing....</h2>
+        <h3 id="shownumber" style="display: none">The number is ??</h3>
+        <div class="current-score">
+          Current Score: <span id="currentscore"></span>
+        </div>
+        <div class="highest-score">
+          Highest Score:<span id="highestscore">0</span>
+        </div>
+      </div>
+   
+
+      <script>
+        let guessnow = document.getElementById("guessnow");
+        let shownumber = document.getElementById("shownumber");
+        let btncheck = document.getElementById("checkit");
+        let btnplayagain = document.getElementById("playagain");
+        let highestscore = document.getElementById("highestscore");
+        let currentscore = document.getElementById("currentscore");
+  
+        let secretNumber = Math.trunc(Math.random() * 16) + 45;
+        let score = 10;
+        let xscore = 0;
+  
+        function scoreline() {
+          score -= 2;
+          currentscore.innerHTML = score;
+          if (score == 0) {
+            guessnow.innerHTML = "Game Over";
+            guessnow.style.color = "white";
+            guessnow.style.backgroundColor = "red";
+            guessnow.style.padding = "10px";
+            guessnow.style.borderRadius = "12px";
+            shownumber.innerHTML = `The number was actually ${secretNumber}`;
+            shownumber.style.display = "block";
+            btnplayagain.style.display = "inline-block";
+          }
+        }
+  
+        function guesengine() {
+          let myGues = Number(document.getElementById("myinput").value);
+  
+          if (isNaN(myGues)) {
+            guessnow.innerHTML = "Invalid input";
+            scoreline();
+            document.getElementById("myinput").value = "";
+            document.getElementById("myinput").focus();
+          } else if (myGues > secretNumber) {
+            guessnow.innerHTML = "Your Guess is too high";
+            guessnow.style.color = "red";
+            scoreline();
+            document.getElementById("myinput").value = "";
+            document.getElementById("myinput").focus();
+          } else if (myGues < secretNumber) {
+            guessnow.innerHTML = "Your Guess is too low";
+            guessnow.style.color = "blue";
+            scoreline();
+            document.getElementById("myinput").value = "";
+            document.getElementById("myinput").focus();
+          } else {
+            guessnow.innerHTML = "Correct";
+            guessnow.style.color = "white";
+            guessnow.style.backgroundColor = "green";
+            guessnow.style.padding = "10px";
+            guessnow.style.borderRadius = "10px";
+            guessnow.style.boxShadow = "0 4px 10px rgba(0, 255, 0, 0.5)";
+            shownumber.innerHTML = `The number is ${secretNumber}`;
+            shownumber.style.display = "block";
+            btncheck.style.display = "none";
+            btnplayagain.style.display = "inline-block";
+            if (score > xscore) {
+              xscore = score;
+              highestscore.innerHTML = xscore;
+            }
+          }
+        }
+  
+        btncheck.addEventListener("click", guesengine);
+        btnplayagain.addEventListener("click", function () {
+          guessnow.innerHTML = `Start Guessing....`;
+          guessnow.style.color = "black";
+          guessnow.style.backgroundColor = "transparent";
+          guessnow.style.boxShadow = "none";
+          document.getElementById("myinput").value = "";
+          document.getElementById("myinput").focus();
+          btncheck.style.display = "inline-block";
+          btnplayagain.style.display = "none";
+          secretNumber = Math.trunc(Math.random() * 15) + 45;
+          score = 10;
+          currentscore.innerHTML = score;
+          shownumber.style.display = "none";
+        });
+      </script>
+
     
-      <h1>
+      <!-- <h1>
         Guess My Number
     </h1>
     <h6 id="guessnow">
@@ -129,7 +229,7 @@
 
        });
 
-    </script>
+    </script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

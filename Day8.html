@@ -41,21 +41,46 @@
         </div>
     </nav>
 
-
     <div class="container">
-        <div>Odd Numbers from 25 to 35</div><br><br>
+        <div class="heading">Odd Numbers from 20 to 35 Using Loop</div>
+        <div class="content">
+            <div class="numbers" id="oddNumberDiv"></div>
+        </div>
 
-        <script>
-            // ODD NUMBER
+        <div class="heading">Prime Numbers from 20 to 35 Using Loop</div>
+        <div class="content">
+            <div class="numbers" id="primeNumberDiv"></div>
+        </div>
+    </div>
 
-            for (let c = 25; c <= 35; c++) {
-                if (c % 2 !== 0) {
-                    document.write(`${c} <br>`);
+    <script>
+        // Odd Numbers
+        let oddNumberDiv = document.getElementById('oddNumberDiv');
+        for (let c = 20; c <= 35; c++) {
+            if (c % 2 !== 0) {
+                oddNumberDiv.innerHTML += `${c}<br>`;
+            }
+        }
+
+        // Prime Numbers
+        let primeNumberDiv = document.getElementById('primeNumberDiv');
+        let i = 20;
+        while (i <= 35) {
+            if (i > 1) {
+                let k = 2;
+                for (; k < i; k++) {
+                    if (i % k === 0) {
+                        break;
+                    }
+                }
+                if (k === i) {
+                    primeNumberDiv.innerHTML += `${i}<br>`;
                 }
             }
+            i++;
+        }
 
-
-        </script>
+    </script>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -64,5 +89,4 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
 </body>
-
 </html>
